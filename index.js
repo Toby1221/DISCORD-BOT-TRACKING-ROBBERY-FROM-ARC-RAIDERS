@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import { getDb } from './firebase/admin.js';
+import express from 'express';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -58,6 +59,20 @@ async function loadCommands() {
     }
   }
 }
+
+//web server for health checks
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Health check endpoint
+app.get('/', (req, res) => {
+  res.status(200).send('Bot is awake and operational!');
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Health check server is running on port ${PORT}`);
+});
 
 client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
