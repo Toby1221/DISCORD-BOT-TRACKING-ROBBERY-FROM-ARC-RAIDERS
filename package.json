@@ -1,0 +1,24 @@
+{
+  "name": "discord-firebase-bot",
+  "version": "0.1.0",
+  "description": "A minimal Discord bot using Firebase (Firestore) as backend",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": ["discord", "discord-bot", "firebase", "firestore"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "firebase-admin": "^11.10.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^2.0.0"
+  }
+}
