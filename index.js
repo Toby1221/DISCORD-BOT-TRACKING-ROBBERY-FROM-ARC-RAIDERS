@@ -5,6 +5,8 @@ import { fileURLToPath } from 'url';
 import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import { getDb } from './firebase/admin.js';
 import express from 'express';
+import cron from 'node-cron';
+import axios from 'axios';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -70,9 +72,26 @@ app.get('/', (req, res) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Health check server is running on port ${PORT}`);
 });
+
+// Scheduled task to keep the bot awake
+const RENDER_EXTERNAL_URL = process.env.RENDER_EXTERNAL_URL;
+
+if (RENDER_EXTERNAL_URL) {
+  cron.schedule('*/10 * * * *', async () => {
+    try {
+      console.log('Keep-Alive: Pinging self to prevent spin-down...');
+      await axios.get(RENDER_EXTERNAL_URL);
+      console.log('Health check ping successful');
+    } catch (err) {
+      console.error('Health check ping failed', err);
+    }
+  });
+} else {
+  console.log('No RENDER_EXTERNAL_URL set, skipping scheduled health checks');
+} 
 
 client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
