@@ -3,3 +3,7 @@ node_modules/
 *.log
 /.vscode/.history
 serviceAccountKey.json
+.git
+.local
+.riplit
+riplit
