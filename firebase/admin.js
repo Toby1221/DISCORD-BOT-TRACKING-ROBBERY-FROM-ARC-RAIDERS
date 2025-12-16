@@ -9,7 +9,8 @@ export function initFirebase() {
   try {
     // First, support a base64-encoded JSON blob in GOOGLE_CREDENTIALS_B64
     if (process.env.GOOGLE_CREDENTIALS_B64) {
-      const decoded = Buffer.from(process.env.GOOGLE_CREDENTIALS_B64, 'base64').toString('utf8');
+      const cleanedB64 = process.env.GOOGLE_CREDENTIALS_B64.replace(/[\s\n\r]/g, '');
+      const decoded = Buffer.from(cleanedB64, 'base64').toString('utf8');
       const cred = JSON.parse(decoded);
       admin.initializeApp({
         credential: admin.credential.cert(cred),

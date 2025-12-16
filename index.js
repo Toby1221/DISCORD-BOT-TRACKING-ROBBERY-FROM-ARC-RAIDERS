@@ -20,8 +20,8 @@ function checkEnv() {
     process.exit(1);
   }
 
-  if (!process.env.GOOGLE_CREDENTIALS && !process.env.GOOGLE_APPLICATION_CREDENTIALS) {
-    console.warn('Warning: No Firebase credentials found. Set GOOGLE_APPLICATION_CREDENTIALS (path) or GOOGLE_CREDENTIALS (JSON string).');
+  if (!process.env.GOOGLE_CREDENTIALS && !process.env.GOOGLE_APPLICATION_CREDENTIALS && !process.env.GOOGLE_CREDENTIALS_B64) {
+    console.warn('Warning: No Firebase credentials found. Set GOOGLE_APPLICATION_CREDENTIALS (path), GOOGLE_CREDENTIALS (JSON string), or GOOGLE_CREDENTIALS_B64 (base64).');
   }
 
   if (!process.env.CLIENT_ID || !process.env.PUBLIC_KEY) {
