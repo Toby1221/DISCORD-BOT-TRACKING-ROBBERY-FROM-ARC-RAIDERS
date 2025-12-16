@@ -48,3 +48,5 @@ export function getDb() {
   if (!appInitialized) initFirebase();
   return admin.firestore();
 }
+
+initFirebase();

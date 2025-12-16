@@ -5,8 +5,6 @@ import { fileURLToPath } from 'url';
 import { Client, GatewayIntentBits, Partials } from 'discord.js';
 import { getDb } from './firebase/admin.js';
 import express from 'express';
-import cron from 'node-cron';
-import axios from 'axios';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -97,10 +95,7 @@ client.on('messageCreate', async (message) => {
   }
 });
 
-import { initFirebase } from './firebase/admin.js';
-
 (async () => {
-  initFirebase();
   await loadCommands();
   if (!process.env.DISCORD_TOKEN) {
     console.error('Missing DISCORD_TOKEN in environment. See .env.example');
