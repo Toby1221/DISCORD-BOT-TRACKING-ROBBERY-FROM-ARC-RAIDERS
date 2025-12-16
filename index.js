@@ -62,7 +62,7 @@ async function loadCommands() {
 
 //web server for health checks
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000;
 
 // Health check endpoint
 app.get('/', (req, res) => {
