@@ -79,3 +79,36 @@ This project is licensed under the **MIT License**.
 ## 🎉 Contributing
 
 Feel free to fork this project, submit bug reports, or suggest new features via pull requests.
+
+🛠 Deployment & Local Hosting (Docker)
+This project is fully containerized. Since moving away from cloud hosting (Replit/Vercel), we use Docker to maintain 24/7 uptime on local hardware.
+
+1. Prerequisites
+Docker Desktop: Installed and running.
+Firebase Credentials: A service account key json file from your google firebase must be in the root directory.
+Environment Variables: A .env file containing your tokens and api keys.
+
+2. Configuration Matrix
+To avoid port conflicts on the host machine, I assigned different ports per dockerfile
+
+3. Setup and Deployment
+Build the Image and Run this in the root of the project folder:
+
+Bash / PS
+docker build -t [discord-bot-image-name-you-choose] .
+
+Run the Container
+
+docker run -d --env-file .env --restart always --name [bot
+-#] [image-build-from-above-command]
+
+4. Management Commands
+
+Check logs (real-time): docker logs -f [container_name]
+Check resource usage: docker stats
+
+If you update code:
+docker stop [container_name]
+docker rm [container_name]
+Run the docker build command again
+Run the docker run command again.
